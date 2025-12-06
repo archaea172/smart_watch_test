@@ -15,7 +15,7 @@
 # define EXAMPLE_ESP_WIFI_SSID      "kaikatsu-wifi2"
 # define EXAMPLE_ESP_WIFI_PASS      "28123006"
 
-#define EXAMPLE_ESP_MAXIMUM_RETRY  CONFIG_ESP_MAXIMUM_RETRY
+#define EXAMPLE_ESP_MAXIMUM_RETRY  5 
 
 #if CONFIG_ESP_STATION_EXAMPLE_WPA3_SAE_PWE_HUNT_AND_PECK
 #define ESP_WIFI_SAE_MODE WPA3_SAE_PWE_HUNT_AND_PECK
@@ -44,6 +44,14 @@
 #elif CONFIG_ESP_WIFI_AUTH_WAPI_PSK
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WAPI_PSK
 #endif
+// 認証方式のしきい値（WPA2 以上を許可など）
+#define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD  WIFI_AUTH_WPA2_PSK
+
+// SAE/WPA3 のモード（不要なら wifi_config から関連項目を消しても良い）
+#define ESP_WIFI_SAE_MODE                  WPA3_SAE_PWE_BOTH
+
+// H2E Identifier（適当な文字列でOK）
+#define EXAMPLE_H2E_IDENTIFIER             "example"
 
 static const char *TAG = "smart watch";
 
