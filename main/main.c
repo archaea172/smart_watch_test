@@ -8,12 +8,12 @@ void app_main(void)
 {
     i2c_port_t i2c_port = I2C_NUM_1;
     i2c_config_t i2c_config = {
-            .mode = I2C_MODE_MASTER,
-            .sda_io_num = 1,
-            .scl_io_num = 2,
-            .sda_pullup_en = GPIO_PULLUP_ENABLE,
-            .scl_pullup_en = GPIO_PULLUP_ENABLE,
-            .master.clk_speed = VL53L5CX_MAX_CLK_SPEED,
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = 1,
+        .scl_io_num = 2,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = VL53L5CX_MAX_CLK_SPEED,
     };
     
     i2c_param_config(i2c_port, &i2c_config);
