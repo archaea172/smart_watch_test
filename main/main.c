@@ -30,11 +30,8 @@ void app_main(void)
 {
     disp = bsp_display_start();
     ESP_ERROR_CHECK(my_backlight_init());
-    ESP_ERROR_CHECK(my_backlight_set(20));  
+    ESP_ERROR_CHECK(my_backlight_set(50));  
     ESP_LOGI(TAG, "Display initialized");
-
-    while (true)
-    {
         bsp_display_lock(0);
 
         lv_obj_t *scr = lv_disp_get_scr_act(disp);
@@ -45,6 +42,7 @@ void app_main(void)
         lv_coord_t cell_w = w / GRID_SIZE;
         lv_coord_t cell_h = h / GRID_SIZE;
         
+        uint8_t alpha = 0;
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
 
@@ -63,13 +61,19 @@ void app_main(void)
                             row * cell_h + 1);
 
                 // 最初の色
-                lv_obj_set_style_bg_opa(cell, LV_OPA_COVER, 0);
+                lv_obj_set_style_bg_opa(cell, alpha, 0);
                 lv_obj_set_style_bg_color(cell,
                                         lv_palette_main(LV_PALETTE_BLUE),
                                         0);
+                
+                alpha += 16;
             }
         }
         bsp_display_unlock();
+
+    while (true)
+    {
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
