@@ -30,6 +30,8 @@ esp_err_t my_backlight_set(int percent);
 void pwm_init(void);
 void pwm_set_percent(int percent);
 
+static lv_display_t *disp = NULL;
+
 void app_main(void)
 {
 
