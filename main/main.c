@@ -4,30 +4,15 @@
 
 #include "vl53l5cx_api.h"
 
-void vl53l5cx_settings_init(void);
+esp_err_t vl53l5cx_settings_init(void);
+
+
+uint8_t 				status, loop, isAlive, isReady, i;
+VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
+VL53L5CX_ResultsData 	Results;
 
 void app_main(void)
 {
-    i2c_port_t i2c_port = I2C_NUM_1;
-    i2c_config_t i2c_config = {
-        .mode = I2C_MODE_MASTER,
-        .sda_io_num = 1,
-        .scl_io_num = 2,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = VL53L5CX_MAX_CLK_SPEED,
-    };
-    
-    i2c_param_config(i2c_port, &i2c_config);
-    i2c_driver_install(i2c_port, i2c_config.mode, 0, 0, 0);
-    
-    uint8_t 				status, loop, isAlive, isReady, i;
-    VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
-    VL53L5CX_ResultsData 	Results;		/* Results data from VL53L5CX */
-    
-    Dev.platform.address = VL53L5CX_DEFAULT_I2C_ADDRESS;
-    Dev.platform.port = i2c_port;
-    
     /* (Optional) Check if there is a VL53L5CX sensor connected */
     status = vl53l5cx_is_alive(&Dev, &isAlive);
     if(!isAlive || status)
@@ -84,4 +69,23 @@ void app_main(void)
 
     status = vl53l5cx_stop_ranging(&Dev);
     printf("End of ULD demo\n");
+}
+
+esp_err_t vl53l5cx_settings_init(void)
+{
+    i2c_port_t i2c_port = I2C_NUM_1;
+    i2c_config_t i2c_config = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = 1,
+        .scl_io_num = 2,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = VL53L5CX_MAX_CLK_SPEED,
+    };
+    
+    i2c_param_config(i2c_port, &i2c_config);
+    i2c_driver_install(i2c_port, i2c_config.mode, 0, 0, 0);
+
+    Dev.platform.address = VL53L5CX_DEFAULT_I2C_ADDRESS;
+    Dev.platform.port = i2c_port;
 }
