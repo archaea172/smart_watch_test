@@ -1,6 +1,6 @@
 dependencies:
   espressif/button:
-    component_hash: 4ed25fcf354b48aa5e5680b9e7549e38d7738f9b613c94a2e39119c100db9c95
+    component_hash: fccb18c37f1cfe0797b74a53a44d3f400f5fd01f4993b40052dfb7f401915089
     dependencies:
     - name: espressif/cmake_utilities
       registry_url: https://components.espressif.com
@@ -12,7 +12,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com
       type: service
-    version: 4.1.4
+    version: 4.1.5
   espressif/cmake_utilities:
     component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
     dependencies:
@@ -87,18 +87,18 @@ dependencies:
       type: service
     version: 9.4.0
   rjrp44/vl53l5cx:
-    component_hash: 7aa14a7ed89e95f73efc5003bd1bfd56542f6092418ff1fd1703aec7cc472998
+    component_hash: 6dbc68bb35a424f6f5392834ddab94ad5fac121a0e3f90dde4d2bdff22699b46
     dependencies:
     - name: idf
       require: private
-      version: '>=5.0'
+      version: '>=5.4'
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 2.0.4
+    version: 4.0.0
 direct_dependencies:
 - espressif/m5_atom_s3
 - rjrp44/vl53l5cx
-manifest_hash: fff86d9fb51186b8739ff5f36c679b292d392007eee414624b7a7b240499732f
+manifest_hash: 41df40fecbe19e567eee793b945aeb5c9399ef4fe59ae9286f6506dec549a0cc
 target: esp32s3
 version: 2.0.0

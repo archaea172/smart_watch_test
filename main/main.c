@@ -92,7 +92,7 @@ void app_main(void)
 
             for(int i = 0; i < 16; i++)
             {
-                int alpha = Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*i] / 2000 * 255;
+                int alpha = Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*i] * 255 / 2000;
                 lv_obj_set_style_bg_opa(cells[(int)(i / 4)][(int)(i % 4)], alpha, 0);
             }
         }
