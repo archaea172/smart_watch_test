@@ -16,8 +16,12 @@
 #define LCD_LEDC_FREQUENCY  500                 // AtomS3は 500Hz 推奨 
 #define LCD_BL_GPIO         16  
 
+#define GRID_SIZE 4
+
 static lv_display_t *disp = NULL;
 static const char *TAG = "app_main";
+
+static lv_obj_t *cells[GRID_SIZE][GRID_SIZE];
 
 esp_err_t my_backlight_init(void);
 esp_err_t my_backlight_set(int percent);
