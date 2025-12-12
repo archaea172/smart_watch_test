@@ -16,19 +16,11 @@
 #define LCD_LEDC_FREQUENCY  500                 // AtomS3は 500Hz 推奨 
 #define LCD_BL_GPIO         16  
 
-#define MOTOR_PIN 1
-#define PWM_FREQ_HZ     1000                // 1kHz
-#define PWM_DUTY_RES    LEDC_TIMER_10_BIT   // 10bit (0〜1023)
-#define PWM_TIMER       LEDC_TIMER_1
-#define PWM_MODE        LEDC_LOW_SPEED_MODE
-#define PWM_CHANNEL     LEDC_CHANNEL_1
-
+static lv_display_t *disp = NULL;
 static const char *TAG = "app_main";
 
 esp_err_t my_backlight_init(void);
 esp_err_t my_backlight_set(int percent);
-
-static lv_display_t *disp = NULL;
 
 void app_main(void)
 {
