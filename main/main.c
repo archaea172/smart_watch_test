@@ -25,6 +25,11 @@
 
 static const char *TAG = "app_main";
 
+esp_err_t my_backlight_init(void);
+esp_err_t my_backlight_set(int percent);
+void pwm_init(void);
+void pwm_set_percent(int percent);
+
 void app_main(void)
 {
 
