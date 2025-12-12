@@ -7,34 +7,14 @@
 esp_err_t vl53l5cx_settings_init(void);
 
 
-uint8_t 				status, loop, isAlive, isReady, i;
+uint8_t 				status, isAlive, isReady, i;
 VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
 VL53L5CX_ResultsData 	Results;
 
 void app_main(void)
 {
-    /* (Optional) Check if there is a VL53L5CX sensor connected */
-    status = vl53l5cx_is_alive(&Dev, &isAlive);
-    if(!isAlive || status)
-    {
-        printf("VL53L5CX not detected at requested address\n");
-        return;
-    }
 
-    /* (Mandatory) Init VL53L5CX sensor */
-    status = vl53l5cx_init(&Dev);
-    if(status)
-    {
-        printf("VL53L5CX ULD Loading failed\n");
-        return;
-    }
 
-    printf("VL53L5CX ULD ready ! (Version : %s)\n",
-           VL53L5CX_API_REVISION);
-           
-    status = vl53l5cx_start_ranging(&Dev);
-
-    loop = 0;
     while(true)
     {
         /* Use polling function to know when a new measurement is ready.
@@ -59,7 +39,6 @@ void app_main(void)
                        Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*i]);
             }
             printf("\n");
-            loop++;
         }
 
         /* Wait a few ms to avoid too high polling (function in platform
@@ -88,4 +67,25 @@ esp_err_t vl53l5cx_settings_init(void)
 
     Dev.platform.address = VL53L5CX_DEFAULT_I2C_ADDRESS;
     Dev.platform.port = i2c_port;
+
+    /* (Optional) Check if there is a VL53L5CX sensor connected */
+    status = vl53l5cx_is_alive(&Dev, &isAlive);
+    if(!isAlive || status)
+    {
+        printf("VL53L5CX not detected at requested address\n");
+        return;
+    }
+
+    /* (Mandatory) Init VL53L5CX sensor */
+    status = vl53l5cx_init(&Dev);
+    if(status)
+    {
+        printf("VL53L5CX ULD Loading failed\n");
+        return;
+    }
+
+    printf("VL53L5CX ULD ready ! (Version : %s)\n",
+           VL53L5CX_API_REVISION);
+           
+    status = vl53l5cx_start_ranging(&Dev);
 }
