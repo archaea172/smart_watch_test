@@ -83,6 +83,15 @@ esp_err_t vl53l5cx_settings_init(void)
         printf("VL53L5CX ULD Loading failed\n");
         return ESP_FAIL;
     }
+    status = vl53l5cx_set_resolution(&Dev, VL53L5CX_RESOLUTION_4X4);
+    if(status) {
+        printf("set_resolution failed: %u\n", status);
+    }
+
+    status = vl53l5cx_set_ranging_frequency_hz(&Dev, 30);
+    if(status) {
+        printf("set_ranging_frequency_hz failed: %u\n", status);
+    }
 
     printf("VL53L5CX ULD ready ! (Version : %s)\n",
            VL53L5CX_API_REVISION);
