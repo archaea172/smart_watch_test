@@ -4,6 +4,8 @@
 
 #include "vl53l5cx_api.h"
 
+void vl53l5cx_settings_init(void);
+
 void app_main(void)
 {
     i2c_port_t i2c_port = I2C_NUM_1;
