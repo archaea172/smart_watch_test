@@ -32,6 +32,12 @@ void app_main(void)
     ESP_ERROR_CHECK(my_backlight_init());
     ESP_ERROR_CHECK(my_backlight_set(20));  
     ESP_LOGI(TAG, "Display initialized");
+
+    while (true)
+    {
+        
+    }
+    
 }
 
 esp_err_t my_backlight_init(void)
