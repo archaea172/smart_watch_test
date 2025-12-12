@@ -1,2 +1,3 @@
 dependencies:
   espressif/m5_atom_s3: "^1.0.0"
+  espressif/esp-sr: "^2.2.1"
