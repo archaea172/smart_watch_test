@@ -23,6 +23,8 @@
 #define PWM_MODE        LEDC_LOW_SPEED_MODE
 #define PWM_CHANNEL     LEDC_CHANNEL_1
 
+static const char *TAG = "app_main";
+
 void app_main(void)
 {
 
