@@ -7,13 +7,13 @@
 esp_err_t vl53l5cx_settings_init(void);
 
 
-uint8_t 				status, isAlive, isReady, i;
+uint8_t 				status, isAlive, isReady;
 VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
 VL53L5CX_ResultsData 	Results;
 
 void app_main(void)
 {
-
+    ESP_ERROR_CHECK(vl53l5cx_settings_init());
 
     while(true)
     {
@@ -31,7 +31,7 @@ void app_main(void)
              * of 16 zones to print. For this example, only the data of first zone are
              * print */
             printf("Print data no : %3u\n", Dev.streamcount);
-            for(i = 0; i < 16; i++)
+            for(int i = 0; i < 16; i++)
             {
                 printf("Zone : %3d, Status : %3u, Distance : %4d mm\n",
                        i,
@@ -73,7 +73,7 @@ esp_err_t vl53l5cx_settings_init(void)
     if(!isAlive || status)
     {
         printf("VL53L5CX not detected at requested address\n");
-        return;
+        return ESP_FAIL;
     }
 
     /* (Mandatory) Init VL53L5CX sensor */
@@ -81,11 +81,13 @@ esp_err_t vl53l5cx_settings_init(void)
     if(status)
     {
         printf("VL53L5CX ULD Loading failed\n");
-        return;
+        return ESP_FAIL;
     }
 
     printf("VL53L5CX ULD ready ! (Version : %s)\n",
            VL53L5CX_API_REVISION);
            
     status = vl53l5cx_start_ranging(&Dev);
+
+    return ESP_OK;
 }
