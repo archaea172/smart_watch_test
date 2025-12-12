@@ -43,44 +43,42 @@ void app_main(void)
     ESP_ERROR_CHECK(my_backlight_init());
     ESP_ERROR_CHECK(my_backlight_set(50));  
     ESP_LOGI(TAG, "Display initialized");
-        bsp_display_lock(0);
 
-        lv_obj_t *scr = lv_disp_get_scr_act(disp);
+    bsp_display_lock(0);
 
-        lv_coord_t w = lv_obj_get_width(scr);
-        lv_coord_t h = lv_obj_get_height(scr);
+    lv_obj_t *scr = lv_disp_get_scr_act(disp);
 
-        lv_coord_t cell_w = w / GRID_SIZE;
-        lv_coord_t cell_h = h / GRID_SIZE;
-        
-        uint8_t alpha = 0;
-        for (int row = 0; row < GRID_SIZE; row++) {
-            for (int col = 0; col < GRID_SIZE; col++) {
+    lv_coord_t w = lv_obj_get_width(scr);
+    lv_coord_t h = lv_obj_get_height(scr);
 
-                lv_obj_t *cell = lv_obj_create(scr);
-                cells[row][col] = cell;
+    lv_coord_t cell_w = w / GRID_SIZE;
+    lv_coord_t cell_h = h / GRID_SIZE;
+    
+    for (int row = 0; row < GRID_SIZE; row++) {
+        for (int col = 0; col < GRID_SIZE; col++) {
 
-                // 余計な枠や影を消す（見た目をシンプルに）
-                lv_obj_remove_style_all(cell);
+            lv_obj_t *cell = lv_obj_create(scr);
+            cells[row][col] = cell;
 
-                // サイズ設定（少しマージンを引く）
-                lv_obj_set_size(cell, cell_w - 2, cell_h - 2);
+            // 余計な枠や影を消す（見た目をシンプルに）
+            lv_obj_remove_style_all(cell);
 
-                // 位置設定（行・列から座標計算）
-                lv_obj_set_pos(cell,
-                            col * cell_w + 1,
-                            row * cell_h + 1);
+            // サイズ設定（少しマージンを引く）
+            lv_obj_set_size(cell, cell_w - 2, cell_h - 2);
 
-                // 最初の色
-                lv_obj_set_style_bg_opa(cell, alpha, 0);
-                lv_obj_set_style_bg_color(cell,
-                                        lv_palette_main(LV_PALETTE_BLUE),
-                                        0);
-                
-                alpha += 16;
-            }
+            // 位置設定（行・列から座標計算）
+            lv_obj_set_pos(cell,
+                        col * cell_w + 1,
+                        row * cell_h + 1);
+
+            // 最初の色
+            lv_obj_set_style_bg_opa(cell, 255, 0);
+            lv_obj_set_style_bg_color(cell,
+                                    lv_palette_main(LV_PALETTE_BLUE),
+                                    0);
         }
-        bsp_display_unlock();
+    }
+    bsp_display_unlock();
 
     while (true)
     {
