@@ -73,7 +73,10 @@ void app_main(void)
 
     while (true)
     {
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        lv_obj_set_style_bg_color(cells[3][3], lv_palette_main(LV_PALETTE_RED), 0);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        lv_obj_set_style_bg_color(cells[3][3], lv_palette_main(LV_PALETTE_BLUE), 0);
     }
 }
 
