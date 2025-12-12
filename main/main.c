@@ -83,7 +83,10 @@ void app_main(void)
 
     while (true)
     {
-        status = vl53l5cx_check_data_ready(&Dev, &isReady);if(isReady)
+        status = vl53l5cx_check_data_ready(&Dev, &isReady);
+
+        bsp_display_lock(0);
+        if(isReady)
         {
             vl53l5cx_get_ranging_data(&Dev, &Results);
 
@@ -93,9 +96,8 @@ void app_main(void)
                 lv_obj_set_style_bg_opa(cells[(int)(i / 4)][(int)(i % 4)], alpha, 0);
             }
         }
+        bsp_display_unlock();
 
-        /* Wait a few ms to avoid too high polling (function in platform
-         * file, not in API) */
         WaitMs(&(Dev.platform), 5);
     }
 }
