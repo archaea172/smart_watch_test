@@ -1,19 +1,9 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_log.h"
 
 #include "vl53l5cx_api.h"
-
-esp_err_t vl53l5cx_settings_init(void);
-
-
-uint8_t 				status, isAlive, isReady;
-VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
-VL53L5CX_ResultsData 	Results;
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_log.h"
 
 #include "bsp/esp-bsp.h"
 #include "lvgl.h"
@@ -34,8 +24,14 @@ static const char *TAG = "app_main";
 
 static lv_obj_t *cells[GRID_SIZE][GRID_SIZE];
 
+uint8_t 				status, isAlive, isReady;
+VL53L5CX_Configuration 	Dev;			/* Sensor configuration */
+VL53L5CX_ResultsData 	Results;
+
 esp_err_t my_backlight_init(void);
 esp_err_t my_backlight_set(int percent);
+
+esp_err_t vl53l5cx_settings_init(void);
 
 void app_main(void)
 {
