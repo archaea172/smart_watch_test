@@ -1,2 +1,2 @@
 dependencies:
-  espressif/m5_atom_s3: "^1.0.0"
+  espressif/m5_atom_s3: "^1.0.2"

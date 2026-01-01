@@ -1,6 +1,6 @@
 dependencies:
   espressif/button:
-    component_hash: 4ed25fcf354b48aa5e5680b9e7549e38d7738f9b613c94a2e39119c100db9c95
+    component_hash: fccb18c37f1cfe0797b74a53a44d3f400f5fd01f4993b40052dfb7f401915089
     dependencies:
     - name: espressif/cmake_utilities
       registry_url: https://components.espressif.com
@@ -12,7 +12,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com
       type: service
-    version: 4.1.4
+    version: 4.1.5
   espressif/cmake_utilities:
     component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
     dependencies:
@@ -88,6 +88,6 @@ dependencies:
     version: 9.4.0
 direct_dependencies:
 - espressif/m5_atom_s3
-manifest_hash: d3a261184be1d6e51a7d6a33919a5dcea221ace6fa47a3694a6d8e8f63f6fc18
+manifest_hash: 58da45e6d6f5232d49e549595e0a983a7e06615bad3953dd8ce91c2168b64a53
 target: esp32s3
 version: 2.0.0
